@@ -2,8 +2,12 @@ FROM gradle:7.4.0-jdk17
 
 WORKDIR /app
 
-COPY /app .
+COPY . .
 
-RUN gradle installDist
+RUN chmod +x ./gradlew || true
 
-CMD ./build/install/app/bin/app
+RUN ./gradlew build -x test
+
+EXPOSE 7070
+
+CMD ["java", "-jar", "build/libs/java-project-72-1.0-SNAPSHOT.jar"]
