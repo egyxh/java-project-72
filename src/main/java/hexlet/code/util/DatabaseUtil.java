@@ -39,6 +39,14 @@ public class DatabaseUtil {
 
         if (jdbcDatabaseUrl != null && !jdbcDatabaseUrl.isEmpty()) {
             logger.info("Using PostgreSQL database from JDBC_DATABASE_URL");
+            if (jdbcDatabaseUrl.contains("postgresql")) {
+                if (!jdbcDatabaseUrl.contains("?")) {
+                    jdbcDatabaseUrl += "?";
+                } else {
+                    jdbcDatabaseUrl += "&";
+                }
+                jdbcDatabaseUrl += "ssl=true&sslmode=require";
+            }
             return jdbcDatabaseUrl;
         } else {
             logger.info("Using H2 in-memory database for development");
