@@ -29,6 +29,12 @@ java {
     targetCompatibility = JavaVersion.VERSION_17
 }
 
+tasks.jar {
+    manifest {
+        attributes("Main-Class" to "hexlet.code.App")
+    }
+}
+
 tasks.withType<JavaCompile> {
     options.encoding = "UTF-8"
 }
